@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0062 不同路径</title>
+</head>
+<body>
+    
+    <script>
+        // dp(m, n) = dp(m - 1, n) + dp(m, n - 1)
+        var uniquePaths = function (m, n) {
+            let memo = new Array(m).fill(0).map(() => new Array(n).fill(0));
+            memo[0][0] = 1;
+            for (let i = 0; i < m; i++)
+                for (let j = 0; j < n; j++) {
+                    if (!i && !j) continue;
+                    memo[i][j] = (i - 1 < 0 ? 0 : memo[i - 1][j])
+                            + (j - 1 < 0 ? 0 : memo[i][j - 1]);
+                }
+            // console.log(memo)
+    
+            return memo[m - 1][n - 1];
+            
+        };
+        let m = 3, n = 7;
+        // uniquePaths(m, n);
+        console.log(uniquePaths(m, n));
+    </script>
+</body>
+</html>

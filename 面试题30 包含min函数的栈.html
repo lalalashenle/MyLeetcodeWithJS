@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面试题30 包含min函数的栈</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * initialize your data structure here.
+         */
+        var MinStack = function () {
+            this.stack_data = [];
+            this.stack_min = [];
+        };
+        
+        /**
+         * @param {number} x
+         * @return {void}
+         */
+        MinStack.prototype.push = function (x) {
+            this.stack_data.push(x);
+            if (!this.stack_min.length || this.stack_min[this.stack_min.length - 1] >= x)
+                this.stack_min.push(x);
+        };
+        
+        /**
+         * @return {void}
+         */
+        MinStack.prototype.pop = function () {
+            if (this.stack_data[this.stack_data.length - 1] === this.stack_min[this.stack_min.length - 1])
+                this.stack_min.pop();
+            this.stack_data.pop();
+        };
+        
+        /**
+         * @return {number}
+         */
+        MinStack.prototype.top = function () {
+            return this.stack_data[this.stack_data.length - 1];
+        };
+        
+        /**
+         * @return {number}
+         */
+        MinStack.prototype.min = function () {
+            return this.stack_min[this.stack_min.length - 1];
+        };
+        
+        let minStack = new MinStack();
+        minStack.push(-2);
+        minStack.push(0);
+        minStack.push(-3);
+        console.log(minStack.stack_data)
+        console.log(minStack.min());
+        minStack.pop();
+        console.log(minStack.top());
+        console.log(minStack.min());
+        
+    </script>
+</body>
+</html>

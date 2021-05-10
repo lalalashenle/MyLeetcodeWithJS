@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0115 不同的子序列</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {string} s
+         * @param {string} t
+         * @return {number}
+         */
+        var numDistinct = function (s, t) {
+            let len_s = s.length, len_t = t.length;
+            if (len_s < len_t) return 0;
+            let memo = new Array(len_s + 1).fill(0).map(() => new Array(len_t + 1).fill(0));
+            // 初始化:
+            for (let i = 0; i < memo.length; i++) memo[i][len_t] = 1;
+            for (let i = len_s - 1; i >= 0; i--) {
+                for (let j = len_t - 1; j >= 0; j--) {
+                    if (s[i] === t[j]) {
+                        memo[i][j] = memo[i + 1][j + 1] + memo[i + 1][j];
+                    } else {
+                        memo[i][j] = memo[i + 1][j];
+                    }
+                }
+            }
+            return memo[0][0];
+        };
+        let s = "", t = "";
+        console.log(numDistinct(s, t));
+    </script>
+</body>
+</html>

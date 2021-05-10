@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1047 删除字符串中的所有相邻重复项</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {string} S
+         * @return {string}
+         */
+        // "abbac"
+        var removeDuplicates = function (S) {
+            let len = S.length;
+            let stack = [];
+            for (let i = 0; i < len; i++) {
+                if (stack.length) {
+                    if (stack[stack.length - 1] === S[i]) {
+                        stack.pop();
+                    } else stack.push(S[i]);
+                } else stack.push(S[i]);
+            }
+            return stack.join('');
+        };
+        let S = "abbdacc";
+        // removeDuplicates(S);
+        console.log(removeDuplicates(S));
+    </script>
+</body>
+</html>

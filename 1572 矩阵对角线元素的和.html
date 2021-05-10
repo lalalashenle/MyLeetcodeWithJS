@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1572 矩阵对角线元素的和</title>
+</head>
+<body>
+    
+    <script>
+        var diagonalSum = function (mat) {
+            let row = mat.length, column = mat[0].length;
+            let ans = 0;
+            for (let i_l = 0, i_r = column - 1, j = 0; j < row;) {
+                if (i_r === i_l)
+                    ans += mat[j][i_l];
+                else ans += (mat[j][i_l] + mat[j][i_r]);
+                i_l++;
+                i_r--;
+                j++;
+            }
+            return ans;
+        };
+        
+        let mat = [[5]];
+        console.log(diagonalSum(mat));
+    </script>
+</body>
+</html>

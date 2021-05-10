@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 63 股票的最大利润</title>
+</head>
+<body>
+    
+    <script>
+        // 只买卖一次
+        var maxProfit = function (prices) {
+            // 遍历过程中维护一个最小值
+            let memo = new Array(prices.length).fill(-1);
+            memo[0] = 0;
+            let min = prices[0];
+            for (let i = 1; i < prices.length; i++) {
+                memo[i] = prices[i] > min ? Math.max(prices[i] - min, memo[i - 1]) : memo[i - 1];
+                min = Math.min(min, prices[i]);
+            }
+            return memo[memo.length - 1];
+        };
+        let prices = [7, 1, 5, 3, 6, 1, 5, 3, 6, 34, 13, 5, 643, 1, 2, 545, 7, 3, 6, 1, 5, 3, 4];
+        console.log(maxProfit(prices));
+    </script>
+</body>
+</html>

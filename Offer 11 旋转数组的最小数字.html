@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 11</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * @param {number[]} numbers
+         * @return {number}
+         */
+        var minArray = function (numbers) {
+            numbers.sort((a, b) => a - b);
+            return numbers[0];
+        };
+        let number = [2, 2, 2, 0, 1];
+        console.log(minArray(number));
+    </script>
+</body>
+</html>

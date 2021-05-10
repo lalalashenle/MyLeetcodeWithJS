@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0034</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * @param {number[]} nums
+         * @param {number} target
+         * @return {number[]}
+         */
+        var searchRange = function (nums, target) {
+            if (nums.length === 0) return [-1, -1];
+            // 0, 5
+            let left = 0, right = nums.length - 1, middle;
+            while (left <= right) {
+                middle = (left + right) >> 1;
+                // console.log(left, right, middle);
+                if (nums[middle] === target) {
+                    left = middle;
+                    break;
+                }
+                if (nums[middle] < target) left = middle + 1;
+                else right = middle - 1;
+            }
+            if (right < left) return [-1, -1];
+            let ans_l = left, ans_r = left;
+            console.log(left);
+            while (nums[ans_l] === target && ans_l >= 0) ans_l--;
+            while (nums[ans_r] === target && ans_r < nums.length) ans_r++;
+            return [ans_l + 1, ans_r - 1];
+        };
+        
+        let nums = [1, 2, 3, 3, 8, 8, 8, 8, 8, 8, 9], target = 8;
+        // searchRange(nums, target);
+        console.log(searchRange(nums, target));
+    </script>
+</body>
+</html>

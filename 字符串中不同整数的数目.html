@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>字符串中不同整数的数目</title>
+</head>
+<body>
+
+    <script>
+        var numDifferentIntegers = function(word) {
+            let reg = /\D+/g;
+            word = word.replace(reg, " ");
+            // console.log(word);
+            let nums = word.split(" ");
+            let memo = new Set();
+            for (let n of nums) {
+                if (n === "") continue;
+                memo.add(parseInt(n));
+            }
+            return memo.size;
+        };
+        let word = "a1b01c001s000002sad2";
+        // numDifferentIntegers(word);
+        console.log(numDifferentIntegers(word));
+    </script>
+</body>
+</html>

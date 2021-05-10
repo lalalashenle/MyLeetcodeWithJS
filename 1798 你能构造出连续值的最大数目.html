@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5712 你能构造出连续值的最大数目</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number[]} coins
+         * @return {number}
+         */
+        // 1, 1, 1, 4
+        var getMaximumConsecutive = function (coins) {
+            coins.sort((a, b) => a - b);
+            let ans = 0;
+            for (let c of coins) {
+                if (c <= ans + 1)
+                    ans += c;
+                else break;
+            }
+            return ans + 1;
+        };
+        
+        let coins = [1, 89, 8, 1, 47, 34, 99, 1, 1, 1, 55, 89, 1, 52, 36, 1, 62, 1, 1, 1, 4, 27, 1, 45, 1, 1, 48, 1, 94, 1, 63];
+        console.log(getMaximumConsecutive(coins));
+    </script>
+</body>
+</html>

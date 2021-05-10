@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0224 基本计算器</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {string} s
+         * @return {number}
+         */
+        // 中缀表达式转后缀表达式，然后计算
+        // (s[i - 1] === '(') || (i === 0)
+        var calculate = function (s) {
+            let stack = [];
+            let mid_s = [];
+            s = s.replaceAll(" ", "");
+            if (s[0] === '-') {
+                s = '0' + s;
+            }
+            // console.log(s);
+            let len = s.length;
+            // "1242 - (-143)"
+            for (let i = 0; i < len; i++) {
+                if (s[i] >= '0' && s[i] <= '9') {
+                    let j = i + 1;
+                    while (s[j] >= '0' && s[j] <= '9') j++;
+                    let num = 0;
+                    for (; i < j; i++) {
+                        num += (s[i] - "0") * Math.pow(10, j - i - 1);
+                    }
+                    mid_s.push(num);
+                    i = j - 1;
+                    
+                } else if (s[i] === '(') {
+                    stack.push(s[i]);
+                } else if (s[i] === ')') {
+                    while (stack[stack.length - 1] !== '(') {
+                        let mid = stack.pop();
+                        mid_s.push(mid);
+                    }
+                    stack.pop();
+                } else if (s[i] === '+') {
+                    while (stack[stack.length - 1] === '+' || stack[stack.length - 1] === '-') {
+                        let mid = stack.pop();
+                        mid_s.push(mid);
+                    }
+                    stack.push(s[i]);
+                } else if (s[i] === '-') {  // 区分负号和减号
+                    if (s[i + 1] >= '0' && s[i + 1] <= '9' && ((s[i - 1] < '0' || s[i - 1] > '9')) && s[i - 1] !== ')') {
+                        
+                        ++i;
+                        let j = i + 1;
+                        while (s[j] >= '0' && s[j] <= '9') j++;
+                        let num = 0;
+                        for (; i < j; i++) {
+                            num += (s[i] - "0") * Math.pow(10, j - i - 1);
+                        }
+                        mid_s.push(-num);
+                        i = j - 1;
+                        
+                    } else {
+                        while (stack[stack.length - 1] === '+' || stack[stack.length - 1] === '-') {
+                            let mid = stack.pop();
+                            mid_s.push(mid);
+                        }
+                        stack.push(s[i]);
+                    }
+                }
+            }
+            while (stack.length !== 0) {
+                let mid = stack.pop();
+                mid_s.push(mid);
+            }
+            
+            // console.log(mid_s);
+            
+            // 接下来进行逆波兰计算：
+            let polan_stack = [];
+            for (let i = 0; i < mid_s.length; i++) {
+                if (mid_s[i] === '+') {
+                    let num_1 = polan_stack.pop();
+                    let num_2 = polan_stack.pop();
+                    polan_stack.push(num_2 + num_1);
+                } else if (mid_s[i] === '-') {
+                    let num_1 = polan_stack.pop();
+                    let num_2 = polan_stack.pop();
+                    polan_stack.push(num_2 - num_1);
+                } else {
+                    polan_stack.push(mid_s[i]);
+                }
+                // console.log(polan_stack);
+            }
+            return polan_stack.pop();
+        };
+        
+        let s = "(1+(4+5+2)-3)+(6+8)";
+        // calculate(s);
+        console.log(calculate(s));
+    </script>
+</body>
+</html>

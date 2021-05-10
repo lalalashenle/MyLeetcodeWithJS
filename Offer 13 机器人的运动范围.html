@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 13 机器人的运动范围</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number} m
+         * @param {number} n
+         * @param {number} k
+         * @return {number}
+         */
+        var movingCount = function (m, n, k) {
+            let memo = new Array(m).fill(0).map(() => new Array(n).fill(false));
+            let ans = 0;
+            let queue = [];
+            queue.push([0, 0]);
+            while (queue.length) {
+                let tmp = queue[0];
+                if (memo[tmp[0]][tmp[1]]) {
+                    queue.shift();
+                } else {
+                    memo[tmp[0]][tmp[1]] = true;
+                    if (judgeSum(tmp[0], tmp[1]) <= k) {
+                        ans++;
+                        if (tmp[1] + 1 < n) queue.push([tmp[0], tmp[1] + 1]);
+                        if (tmp[0] + 1 < m) queue.push([tmp[0] + 1, tmp[1]]);
+                        queue.shift();
+                    } else queue.shift();
+                }
+            }
+            return ans;
+        };
+        const judgeSum = function (i, j) {
+            let ans = 0;
+            while (i !== 0) {
+                ans += i % 10;
+                i = Math.floor(i / 10);
+            }
+            while (j !== 0) {
+                ans += j % 10;
+                j = Math.floor(j / 10);
+            }
+            return ans;
+        };
+        let m = 3, n = 1, k = 0;
+        // movingCount(m, n, k);
+        console.log(movingCount(m, n, k));
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 14 剪绳子-II</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number} n
+         * @return {number}
+         */
+        var cuttingRope = function (n) {
+            if (n === 2) return 1;
+            if (n === 3) return 2;
+            if (n === 4) return 4;
+            let res = 1;
+            while (n > 4) {
+                res = (res * 3) % 1000000007;
+                n -= 3;
+            }
+            
+            return (n * res) % 1000000007;
+        };
+        
+        let n = 10;
+        console.log(cuttingRope(n));
+    </script>
+</body>
+</html>

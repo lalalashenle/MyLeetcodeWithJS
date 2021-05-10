@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0015 三数之和</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number[]} nums
+         * @return {number[][]}
+         */
+        var threeSum = function (nums) {
+            nums.sort((a, b) => a - b);
+            const len = nums.length;
+            let ans = [];
+            for (let i = 0; i < len - 1; i++) {
+                if (i > 0 && nums[i] === nums[i - 1]) continue;
+                let left = i + 1, right = len - 1;
+                while (left < right) {
+                    if (nums[i] + nums[left] + nums[right] === 0) {
+                        ans.push([nums[i], nums[left], nums[right]]);
+                        
+                        while (left < right && nums[left] === nums[left + 1]) left++;
+                        while (left < right && nums[right] === nums[right - 1]) right--;
+                        
+                        left++;
+                    } else if (nums[i] + nums[left] + nums[right] < 0) left++;
+                    else right--;
+                }
+            }
+            
+            return ans;
+        };
+        
+        let nums = [0, 0, 0];
+        console.log(threeSum(nums));
+    </script>
+</body>
+</html>

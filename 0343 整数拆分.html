@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0343 整数拆分</title>
+</head>
+<body>
+    
+    <script>
+        
+        var integerBreak = function (n) {
+            let memo = new Array(n + 1).fill(0);
+            memo[2] = 1;
+            for (let i = 3; i <= n; i++) {
+                // 拆或不拆
+                for (let j = 2; j <= i; j++) {
+                    memo[i] = Math.max(memo[i], memo[j] * (i - j), j * (i - j));
+                }
+            }
+            return memo[n];
+        };
+        console.log(integerBreak(10))
+    </script>
+</body>
+</html>

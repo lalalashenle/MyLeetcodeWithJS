@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 31 栈的压入、弹出序列</title>
+</head>
+<body>
+    
+    <script>
+        var validateStackSequences = function (pushed, popped) {
+            if (pushed.length !== popped.length) return false;
+            if (pushed.length === 0 && popped.length === 0) return true;
+            let tmpStack = [];
+            for (let p of pushed) {
+                if (p !== popped[0]) tmpStack.push(p);
+                else {
+                    popped.shift();
+                    while (tmpStack.length && tmpStack[tmpStack.length - 1] === popped[0]) {
+                        tmpStack.pop();
+                        popped.shift();
+                    }
+                }
+            }
+            return !popped.length;
+        };
+        let pushed = [1, 2, 3, 4, 5], popped = [4, 3, 5, 1, 2];
+        console.log(validateStackSequences(pushed, popped));
+    </script>
+</body>
+</html>

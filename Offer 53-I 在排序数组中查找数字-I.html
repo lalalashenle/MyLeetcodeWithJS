@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 53-I 在排序数组中查找数字-I</title>
+</head>
+<body>
+    
+    <script>
+        var search = function(nums, target) {
+            if (!nums.length) return 0;
+            let left = 0, right = nums.length - 1, middle;
+            while (left <= right) {
+                middle = (left + right) >> 1;
+                if (nums[middle] === target) break;
+                else if (nums[middle] < target) {
+                    left = middle + 1;
+                } else {
+                    right = middle - 1;
+                }
+            }
+            if (left > right) return 0;
+            let index_l = middle - 1, index_r = middle + 1, ans = 1;
+            while (nums[index_l] === target) {
+                ans++;
+                index_l--;
+            }
+            while (nums[index_r] === target) {
+                ans++;
+                index_r++;
+            }
+            return ans;
+        };
+    </script>
+</body>
+</html>

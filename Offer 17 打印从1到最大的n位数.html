@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 17 打印从1到最大的n位数</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number} n
+         * @return {number[]}
+         */
+        var printNumbers = function (n) {
+            let max = ''
+    
+            // 巧用字符串 构造最大值
+            while (n--) max += '9'
+            console.log(max);
+            console.log(max - '0')
+    
+            let a = new Array(max - '0').fill(0).map((v, i) => {
+                console.log(v, i);
+                return i + 1
+            })
+            // console.log(a)
+        };
+        let n = 2;
+        printNumbers(n);
+    </script>
+</body>
+</html>

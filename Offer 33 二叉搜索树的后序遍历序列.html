@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Offer 33 二叉搜索树的后序遍历序列</title>
+</head>
+<body>
+
+    <script>
+        // 递归解法：
+        // var verifyPostorder = function(postorder) {
+        //     const dfs = function (start, end) {
+        //         if (start >= end) return true;
+        //         let head_val = postorder[end];
+        //         // 找左子树的结束点
+        //         let left = start;
+        //         while (postorder[left] < head_val) left++;
+        //         --left;
+        //         let right = left + 1;
+        //         // 找右子树的结束点
+        //         while (postorder[right] > head_val) right++;
+        //         return  (right === end) && dfs(start, left) && dfs(left + 1, right - 1);
+        //     }
+        //     return dfs(0, postorder.length - 1);
+        // };
+
+        // 单调栈：
+        var verifyPostorder = function(postorder) {
+            // 逆序遍历数组 ——> 根右左
+            let stack = [], ent_left;
+            let len = postorder.length;
+            stack.push(postorder[len - 1]);
+            for (let i = len - 2; i >= 0; i--) {
+                if (postorder[i] > ent_left) return false;
+                while (stack.length && postorder[i] < stack[stack.length - 1]) {    // 此时进入左子树
+                    ent_left = stack.pop();     // 记录根节点
+                }
+                stack.push(postorder[i]);
+            }
+            return true;
+        };
+    </script>
+</body>
+</html>

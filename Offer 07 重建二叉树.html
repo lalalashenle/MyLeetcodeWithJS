@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 07</title>
+</head>
+<body>
+    
+    <script>
+        
+        function TreeNode(val) {
+            this.val = val;
+            this.left = this.right = null;
+        }
+        
+        /*
+         @param {number[]} preorder
+         @param {number[]} inorder
+         @return {TreeNode}
+         */
+        // 重建二叉树
+        var buildTree = function (preorder, inorder) {
+            if (preorder.length && inorder.length) {
+                let head = new TreeNode(preorder[0]);
+                let leftInNum = [], rightInNum = [], index = 0;
+                while (inorder[index] !== preorder[0]) index++;
+                leftInNum = inorder.slice(0, index);
+                rightInNum = inorder.slice(index + 1);
+                // console.log(leftNum, rightNum);
+                
+                let leftPrNum = [], rightPrNum = [];
+                leftPrNum = preorder.slice(1, leftInNum.length + 1);
+                rightPrNum = preorder.slice(leftInNum.length + 1);
+                // console.log(leftPrNum, rightPrNum);
+                
+                head.left = buildTree(leftPrNum, leftInNum);
+                head.right = buildTree(rightPrNum, rightInNum);
+                
+                return head;
+            } else return null;
+        };
+
+        let preorder = [3,9,20,15,7], inorder = [9,3,15,20,7];
+        console.log(buildTree(preorder, inorder));
+        
+    </script>
+</body>
+</html>

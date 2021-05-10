@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 58-I 翻转单词顺序</title>
+</head>
+<body>
+    
+    <script>
+        var reverseWords = function (s) {
+            // TODO: 正则解法
+            let reg = /\S+/g;
+            // console.log(s.match(reg));
+            let arr = s.match(reg), ans = "";
+            if (!arr) return "";
+            for (let i = arr.length - 1; i >= 0; i--) {
+                ans += arr[i];
+                if (i) ans += " ";
+            }
+            return ans;
+        };
+        let s = "";
+        console.log(reverseWords(s));
+    </script>
+</body>
+</html>

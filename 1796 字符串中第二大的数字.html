@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5693 字符串中第二大的数字</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {string} s
+         * @return {number}
+         */
+        var secondHighest = function (s) {
+            s = s.replace(/\D/g, "");
+            let arr = [];
+            for (let a of s) arr.push(a);
+            if (arr.length < 2) return -1;
+            arr.sort((a, b) => b - a);
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] < arr[i - 1]) return arr[i];
+            }
+            return -1;
+        };
+        
+        let s = "d465a12321afd";
+        // secondHighest(s);
+        console.log(secondHighest(s));
+    </script>
+</body>
+</html>

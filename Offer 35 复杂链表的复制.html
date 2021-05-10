@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 35 复杂链表的复制</title>
+</head>
+<body>
+    
+    <script>
+        
+        // Definition for a Node.
+        function Node(val, next, random) {
+            this.val = val;
+            this.next = next;
+            this.random = random;
+        };
+        
+        /*
+         * @param {Node} head
+         * @return {Node}
+         **/
+        var copyRandomList = function (head) {
+            let visited = new Map();
+            return dfs(visited, head);
+        };
+        const dfs = function (visited, node) {
+            if (!node) return null;
+            if (visited.has(node)) {
+                return visited.get(node);
+            }
+            let newNode = new Node(node.val);
+            visited.set(node, newNode);
+            newNode.next = dfs(visited, node.next);
+            newNode.random = dfs(visited, node.random);
+            return newNode;
+        }
+    </script>
+</body>
+</html>

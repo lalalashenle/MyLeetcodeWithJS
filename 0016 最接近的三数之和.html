@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0016</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * @param {number[]} nums
+         * @param {number} target
+         * @return {number}
+         */
+        var threeSumClosest = function (nums, target) {
+            nums.sort((a, b) => a - b);
+            let num = nums[0] + nums[1] + nums[2];
+            for (let i = 0; i < nums.length - 2; i++) {
+                let left = i + 1, right = nums.length - 1;
+                
+                while (left < right) {
+                    
+                    let numTmp = nums[i] + nums[left] + nums[right];
+                    
+                    if (numTmp < target) {
+                        left++;
+                    } else if (numTmp > target) {
+                        right--;
+                    } else return target;
+                    
+                    if(Math.abs(num - target) > Math.abs(numTmp - target))
+                        num = numTmp;
+                }
+            }
+            
+            return num;
+        };
+        
+        let nums = [1,1,1,0], target = -100;
+        console.log(threeSumClosest(nums, target));
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数组元素积的符号</title>
+</head>
+<body>
+    
+    <script>
+        var arraySign = function (nums) {
+            let ans = 1;
+            for (let n of nums)
+                ans *= n;
+            return ans === 0 ? 0 : ((ans > 0) ? 1 : -1);
+        };
+        let nums = [-1,1,-1,1,-1];
+        console.log(arraySign(nums));
+    </script>
+</body>
+</html>

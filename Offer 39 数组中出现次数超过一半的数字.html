@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 39 数组中出现次数超过一半的数字</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number[]} nums
+         * @return {number}
+         */
+        var majorityElement = function (nums) {
+            nums.sort((a, b) => a - b);
+            return nums[nums.length >> 1];
+        };
+        
+        let nums = [1, 2, 3, 2, 2, 2, 5, 4, 2];
+        console.log(majorityElement(nums));
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 21 调整数组顺序使奇数位于偶数前面</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * @param {number[]} nums
+         * @return {number[]}
+         */
+        var exchange = function(nums) {
+            let ans_o = [], ans_e = [], ans = [];
+            for (let n of nums) {
+                if (n % 2) {
+                    ans_o.push(n);
+                } else ans_e.push(n);
+            }
+            ans = ans.concat(ans_o.slice(), ans_e.slice());
+            return ans;
+        };
+        
+        let nums = [1,2,3,4];
+        console.log(exchange(nums));
+    </script>
+</body>
+</html>

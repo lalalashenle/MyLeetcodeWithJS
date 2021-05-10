@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>找出游戏的获胜者</title>
+</head>
+<body>
+    
+    <script>
+        var findTheWinner = function (n, k) {
+            let arr = new Array(n).fill(0).map((a, b) => b + 1);
+            let point = 1, tmp_k = k - 1;
+            while (arr.length !== 1) {
+                tmp_k %= arr.length;
+                point += tmp_k;
+                point %= arr.length;
+                console.log(arr, point)
+                arr.splice(point - 1, 1);
+            }
+            return arr[0];
+        };
+        let n = 5, k = 3;
+        // findTheWinner(n, k);
+        console.log(findTheWinner(n, k));
+    </script>
+</body>
+</html>

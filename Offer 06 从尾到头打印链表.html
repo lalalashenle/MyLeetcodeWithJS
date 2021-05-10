@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 06</title>
+</head>
+<body>
+    
+    <script>
+        
+        // Definition for singly-linked list.
+        function ListNode(val) {
+            this.val = val;
+            this.next = null;
+        }
+        
+        /**
+         * @param {ListNode} head
+         * @return {number[]}
+         */
+        var reversePrint = function (head) {
+            let L = new ListNode(9999);
+            let p = head, q;
+            L.next = null;
+            
+            while (p) {
+                let q = p.next;
+                p.next = L.next;
+                L.next = p;
+                p = q;
+            }
+            let res = [];
+            // console.log(res)
+            p = L.next;
+            while (p) {
+                res.push(p.val);
+                p = p.next;
+            }
+            return res;
+        };
+        
+        let test1 = new ListNode(1);
+        let test2 = new ListNode(3);
+        let test3 = new ListNode(2);
+        test1.next = test2;
+        test2.next = test3;
+        
+        let head = test1;
+        console.log(reversePrint(head));
+        
+    </script>
+</body>
+</html>

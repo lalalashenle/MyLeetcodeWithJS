@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0227 基本计算器-II</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * @param {string} s
+         * @return {number}
+         */
+        var calculate = function (s) {
+            console.log(Polan(s));
+            
+            let cal_s = Polan(s);
+            let myStack = [];
+            
+            let len = cal_s.length;
+            let top1, top2;
+            for (let i = 0; i < len; i++) {
+                
+                switch (cal_s[i]) {
+                    case '+':
+                        top1 = myStack[myStack.length - 1];
+                        myStack.pop();
+                        top2 = myStack[myStack.length - 1];
+                        myStack.pop();
+                        myStack.push(top2 + top1);
+                        break;
+                    case '-':
+                        top1 = myStack[myStack.length - 1];
+                        myStack.pop();
+                        top2 = myStack[myStack.length - 1];
+                        myStack.pop();
+                        myStack.push(top2 - top1);
+                        break;
+                    case '*':
+                        top1 = myStack[myStack.length - 1];
+                        myStack.pop();
+                        top2 = myStack[myStack.length - 1];
+                        myStack.pop();
+                        myStack.push(top2 * top1);
+                        break;
+                    case '/':
+                        top1 = myStack[myStack.length - 1];
+                        myStack.pop();
+                        top2 = myStack[myStack.length - 1];
+                        myStack.pop();
+                        myStack.push(Math.floor(top2 / top1));
+                        break;
+                    default :
+                        myStack.push(cal_s[i]);
+                }
+                
+            }
+            
+            console.log(myStack[myStack.length - 1]);
+            return myStack[myStack.length - 1];
+        };
+        
+        // 中缀转后缀
+        function Polan(s) {
+            s = s.replaceAll(" ", "");
+            let typeStack = [];
+            let ret = [];
+            const len = s.length;
+            for (let i = 0; i < len; ++i) {
+                if (s[i] === '*' || s[i] === '/') {
+                    while (typeStack[typeStack.length - 1] === '*' || typeStack[typeStack.length - 1] === '/') {
+                        ret.push(typeStack[typeStack.length - 1]);
+                        typeStack.pop();
+                    }
+                    typeStack.push(s[i]);
+                } else if (s[i] === '+' || s[i] === '-') {
+                    while (typeStack.length) {
+                        ret.push(typeStack[typeStack.length - 1]);
+                        typeStack.pop();
+                    }
+                    typeStack.push(s[i]);
+                } else {
+                    let j = i + 1;
+                    let r = 0
+                    while (s[j] >= '0' && s[j] <= '9') j++;
+                    for (; i < j; i++) {
+                        r += (s[i] - '0') * Math.pow(10, j - i - 1)
+                    }
+                    --i;
+                    ret.push(r);
+                }
+            }
+            
+            while (typeStack.length) {
+                ret.push(typeStack[typeStack.length - 1]);
+                typeStack.pop();
+            }
+            
+            return ret;
+        }
+        
+        let s = "14+3-2*3";
+        calculate(s);
+    
+    </script>
+</body>
+</html>

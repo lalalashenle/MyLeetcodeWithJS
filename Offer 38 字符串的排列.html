@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 38 字符串的排列</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {string} s
+         * @return {string[]}
+         */
+        var permutation = function (s) {
+            let len = s.length;
+            let ans = new Set();
+            let visited = new Array(len).fill(false);
+            const dfs = function (tmp_s) {
+                if (tmp_s.length > len) return;
+                if (tmp_s.length === len) {
+                    ans.add(tmp_s.join(""));
+                    return;
+                }
+                for (let i = 0; i < len; i++) {
+                    if (visited[i]) continue;
+                    tmp_s.push(s[i]);
+                    visited[i] = true;
+                    dfs(tmp_s);
+                    tmp_s.pop();
+                    visited[i] = false;
+                }
+            };
+            let tmp_s = [];
+            dfs(tmp_s);
+            return [...ans];
+        };
+        let s = "abc"
+        console.log(permutation(s));
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 24 反转链表</title>
+</head>
+<body>
+    
+    <script>
+        
+        function ListNode(val) {
+            this.val = val;
+            this.next = null;
+        }
+        
+        /*
+         * @param {ListNode} head
+         * @return {ListNode}
+         */
+        var reverseList = function (head) {
+            let L = new ListNode(999);
+            let p = head, q;
+            while (p) {
+                q = p.next;
+                p.next = L.next;
+                L.next = p;
+                p = q;
+            }
+            return L.next;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 32-III 从上到下打印二叉树-III</title>
+</head>
+<body>
+    
+    <script>
+        function TreeNode(val) {
+            this.val = val;
+            this.left = this.right = null;
+        }
+        
+        // @param {TreeNode} root
+        // @return {number[][]}
+        var levelOrder = function (root) {
+            if (!root) return [];
+            const queue = [];
+            const ans = [];
+            let layer = 1;
+            queue.push(root);
+            while (queue.length) {
+                let tmp = [];
+                let len = queue.length;
+                if (layer % 2) {  // 奇数层
+                    for (let i = 0; i < len; i++) {
+                        tmp.push(queue[0].val);
+                        if (queue[0].left) queue.push(queue[0].left);
+                        if (queue[0].right) queue.push(queue[0].right);
+                        queue.shift();
+                    }
+                } else {    // 偶数层
+                    for (let i = 0; i < len; i++) {
+                        tmp.unshift(queue[0].val);
+                        if (queue[0].left) queue.push(queue[0].left);
+                        if (queue[0].right) queue.push(queue[0].right);
+                        queue.shift();
+                    }
+                }
+                layer++;
+                ans.push(tmp.slice());
+            }
+            return ans;
+        };
+    </script>
+</body>
+</html>

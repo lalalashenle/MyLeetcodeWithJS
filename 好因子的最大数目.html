@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>好因子的最大数目</title>
+</head>
+<body>
+    
+    <script>
+        let mod = BigInt(1e+9 + 7);
+        var maxNiceDivisors = function (primeFactors) {
+            if (primeFactors <= 4) return primeFactors;
+            
+            let n = Math.floor(primeFactors / 3), remain = primeFactors % 3;
+            if (remain === 0) return pow_3(n);
+            else if (remain === 1) return pow_3(n - 1) * 4n % mod;
+            else if (remain === 2) return pow_3(n) * 2n % mod;
+            
+        };
+        const pow_3 = function (n) {
+            n = BigInt(n);
+            let ans = 1n, p = 3n;
+            while (n !== 0n) {
+                if ((n % 2n) !== 0n) {
+                    ans = (ans * p) % mod;
+                }
+                p = (p * p) % mod;
+                n  = n >> 1n;
+            }
+            return ans;
+        }
+        let primeFactors = 10;
+        console.log(maxNiceDivisors(primeFactors));
+    </script>
+</body>
+</html>

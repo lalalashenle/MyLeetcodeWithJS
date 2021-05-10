@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 25 合并两个排序的链表</title>
+</head>
+<body>
+    
+    <script>
+        
+        function ListNode(val) {
+            this.val = val;
+            this.next = null;
+        }
+        
+        /*
+         * @param {ListNode} l1
+         * @param {ListNode} l2
+         * @return {ListNode}
+         */
+        var mergeTwoLists = function (l1, l2) {
+            let L = new ListNode(999), p = L;
+            while (l1 && l2) {
+                if (l1.val <= l2.val) {
+                    p.next = new ListNode(l1.val);
+                    p = p.next;
+                    l1 = l1.next;
+                } else {
+                    p.next = new ListNode(l2.val);
+                    p = p.next;
+                    l2 = l2.next;
+                }
+            }
+            
+            if (l1) l2 = l1;
+            while (l2) {
+                p.next = new ListNode(l2.val);
+                p = p.next;
+                l2 = l2.next;
+            }
+            
+            return L.next;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5711 有界数组中指定下标处的最大值</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number} n
+         * @param {number} index
+         * @param {number} maxSum
+         * @return {number}
+         */
+        var maxValue = function (n, index, maxSum) {
+            let left = index, right = index, ans = 1;
+            let rest = maxSum - n;
+            while (left > 0 || right < n - 1) {
+                let add = right - left + 1;
+                if (rest >= add) {
+                    left = Math.max(0, left - 1);
+                    right = Math.min(n - 1, right + 1);
+                    rest -= add;
+                    ans++;
+                } else {
+                    break;
+                }
+            }
+            return ans + Math.floor(rest / n);
+        };
+        
+        let n = 3, index = 2, maxSum = 18;
+        console.log(maxValue(n, index, maxSum));
+    </script>
+</body>
+</html>

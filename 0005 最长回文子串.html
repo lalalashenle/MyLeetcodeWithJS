@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0005 最长回文子串</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {string} s
+         * @return {string}
+         */
+        // 动态规划
+        var longestPalindrome = function (s) {
+            let len = s.length;
+            if (len === 0) return "";
+            let ans = 1, start = 0;
+            let memo = new Array(len).fill(0).map(() => new Array(len).fill(false));
+            for (let i = 0; i < len; i++) memo[i][i] = true;
+            
+            for (let i = len - 1; i >= 0; i--) {
+                for (let j = i; j < len; j++) {
+                    if (s[i] === s[j]) memo[i][j] = true;
+                    if (i + 1 <= j - 1) memo[i][j] = memo[i][j] && memo[i + 1][j - 1];
+                    if (memo[i][j] && ans < j - i + 1) {
+                        ans = j - i + 1;
+                        start = i;
+                    }
+                }
+            }
+            return s.slice(start, start + ans);
+        };
+        
+        let s = "";
+        console.log(longestPalindrome(s));
+    </script>
+</body>
+</html>

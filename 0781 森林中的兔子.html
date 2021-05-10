@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0781 森林中的兔子</title>
+</head>
+<body>
+    
+    <script>
+        var numRabbits = function (answers) {
+            let len = answers.length;
+            let nums = new Array(1000).fill(0);
+            for (let a of answers)
+                nums[a]++;
+            
+            let ans = 0;
+            for (let i = 0; i < nums.length; i++) {
+                if (!i) ans += nums[i];
+                else {
+                    while (nums[i] > 0) {
+                        ans += (i + 1);
+                        nums[i] = Math.floor(nums[i] - (i + 1));
+                    }
+                }
+            }
+            return Math.max(ans, len);
+        };
+        let answers = [1,0,1,0,0,2];
+        console.log(numRabbits(answers));
+    </script>
+</body>
+</html>

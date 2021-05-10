@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0740 删除并获得点数</title>
+</head>
+<body>
+    
+    <script>
+        var deleteAndEarn = function (nums) {
+            nums.sort((a, b) => a - b);
+            let l = nums[nums.length - 1];
+            let packet = new Array(l).fill(0).map((x, i) => i + 1);
+            let value = new Array(l).fill(0);
+            let len = 1;
+            for (let i = 0; i < nums.length; i++) {
+                if (nums[i] !== nums[i + 1]) {
+                    value[nums[i] - 1] = len;
+                    len = 1;
+                } else len++;
+            }
+            // console.log(packet, value);
+            
+            let len_p = packet.length;
+            let memo = new Array(len_p);
+            memo[0] = packet[0] * value[0];
+            for (let i = 1; i < len_p; i++) {
+                let tmp1 = packet[i] * value[i] + ((i - 2 >= 0) ? memo[i - 2] : 0);
+                let tmp2 = memo[i - 1];
+                memo[i] = Math.max(tmp1, tmp2);
+            }
+            // console.log(memo);
+            return memo[len_p - 1];
+        };
+        
+        let nums = [1, 3, 5];
+        console.log(deleteAndEarn(nums));
+    
+    </script>
+</body>
+</html>

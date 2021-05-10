@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0059 螺旋矩阵-II</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number} n
+         * @return {number[][]}
+         */
+        var generateMatrix = function (n) {
+            let num = 1, max = n * n;
+            let left = 0, right = n - 1, top = 0, bottom = n - 1;
+            let ans = new Array(n).fill(0).map(() => {
+                return new Array(n).fill(0);
+            })
+            // 这种方法里的数组中的每一个数组的地址是一样的，改变其中一个，则所有的都改变！
+            // let ans = new Array(n).fill(new Array(n).fill(0))
+            while (num <= max) {
+                // 左到右
+                for (let i = left; i <= right; i++) {
+                    if (num > max) break;
+                    ans[top][i] = num;
+                    num++;
+                }
+                top++;
+                // 上到下
+                for (let i = top; i <= bottom; i++) {
+                    if (num > max) break;
+                    ans[i][right] = num;
+                    num++;
+                }
+                right--;
+                // 右到左
+                for (let i = right; i >= left; i--) {
+                    if (num > max) break;
+                    ans[bottom][i] = num;
+                    num++;
+                }
+                bottom--;
+                // 下到上
+                for (let i = bottom; i >= top; i--) {
+                    if (num > max) break;
+                    ans[i][left] = num;
+                    num++;
+                }
+                left++;
+            }
+            
+            return ans;
+        };
+        
+        let n = 3;
+        // generateMatrix(n)
+        console.log(generateMatrix(4));
+    </script>
+</body>
+</html>

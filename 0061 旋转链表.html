@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0061 旋转链表</title>
+</head>
+<body>
+    
+    <script>
+        
+        function ListNode(val, next) {
+            this.val = (val === undefined ? 0 : val)
+            this.next = (next === undefined ? null : next)
+        }
+        
+        /*
+         * @param {ListNode} head
+         * @param {number} k
+         * @return {ListNode}
+         */
+        // 链表平移k个位置
+        // 寻找倒数第k个位置索引
+        var rotateRight = function (head, k) {
+            let L = new ListNode(9999);
+            L.next = head;
+            let p_k = L, p_h = head, p_len, p_pre;
+            let len = 0;
+            while (p_k.next) {
+                len++;
+                p_k = p_k.next;
+            }
+            p_len = p_k;
+            k = k % len;
+            if (!k) return head;
+            p_k = L;
+            let q = L;
+            for (let i = 0; i < k; i++) {
+                q = q.next;
+            }
+            while (q.next) {
+                q = q.next;
+                p_k = p_k.next;
+            }
+            p_pre = p_k;
+            p_k = p_k.next;
+            // for (let i = 0; i < k; i++) {
+            //     p_k = p_k.next;
+            //     if (i === k - 2) p_pre = p_k;
+            // }
+            // TODO: p_len链接p_h, p_h链尾接null;
+            L.next = p_k;
+            p_len.next = p_h;
+            p_pre.next = null;
+            return L.next;
+        };
+    </script>
+</body>
+</html>

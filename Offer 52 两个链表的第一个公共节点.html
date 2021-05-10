@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 52 两个链表的第一个公共节点</title>
+</head>
+<body>
+    
+    <script>
+        
+        function ListNode(val) {
+            this.val = val;
+            this.next = null;
+        }
+        
+        var getIntersectionNode = function (headA, headB) {
+            if (!qA || !qB) return null;
+            let qA = headA, qB = headB;
+            while (qA !== qB) {
+                qA = qA ? qA.next : headB;
+                qB = qB ? qB.next : headA;
+            }
+            
+            return qA;
+        };
+    </script>
+</body>
+</html>

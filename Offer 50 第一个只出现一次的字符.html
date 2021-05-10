@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 50 第一个只出现一次的字符</title>
+</head>
+<body>
+    
+    <script>
+        var firstUniqChar = function (s) {
+            let map = new Map();
+            let len = s.length;
+            for (let i = 0; i < len; i++) {
+                if (!map.has(s[i])) map.set(s[i], [true, i]);
+                else map.set(s[i], [false, i]);
+            }
+            // console.log(map);
+            for (let m of map)
+                if (m[1][0]) return s[m[1][1]];
+    
+            return " ";
+        };
+        
+        let s = "aasaabbf";
+        console.log(firstUniqChar(s));
+    </script>
+</body>
+</html>

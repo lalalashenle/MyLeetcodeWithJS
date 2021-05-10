@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 48 最长不含重复字符的子字符串</title>
+</head>
+<body>
+    
+    <script>
+        // 计算不包含重复字符的子字符串长度
+        var lengthOfLongestSubstring = function(s) {
+            let len = s.length;
+            if (!len) return 0;
+            let memo = new Array(len).fill(0);
+            memo[0] = 1;
+            let map = new Map(), ans = 1;
+            map.set(s[0], 0);
+            for (let i = 1; i < len; i++) {
+                if (!map.has(s[i])) {
+                    map.set(s[i], i);
+                    memo[i] = memo[i - 1] + 1;
+                } else {
+                    let ind_tmp = map.get(s[i]);
+                    map = new Map();
+                    for (let k = ind_tmp + 1; k <= i; k++) {
+                        map.set(s[k], k);
+                        memo[i] += 1;
+                    }
+                }
+                
+                ans = Math.max(memo[i], ans);
+            }
+            return ans;
+        };
+        
+        let s = "abcabcbb";
+        console.log(lengthOfLongestSubstring(s));
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 44 数字序列中某一位的数字</title>
+</head>
+<body>
+    
+    <script>
+        var findNthDigit = function (n) {
+            // 1    --  9,      9
+            // 10   --  99,     90
+            // 100  --  999,    900
+            // 1000 --  9999,   9000
+            if (!n) return 0;
+            let ind = 1, tmp = n;
+            while (n > 0) {
+                tmp -= (9 * Math.pow(10, (ind - 1)) * ind);
+                if (tmp > 0) {
+                    n = tmp;
+                    ind++;
+                } else break;
+            }
+            let num = Math.pow(10, (ind - 1)) + Math.floor((n - 1) / ind);
+            let ans = (n - 1) % ind;
+            return num.toString()[ans];
+            
+        };
+        console.log(findNthDigit(13));
+    </script>
+</body>
+</html>

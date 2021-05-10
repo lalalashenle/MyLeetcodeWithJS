@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>还原排列的最少操作步数</title>
+</head>
+<body>
+    
+    <script>
+        var reinitializePermutation = function (n) {
+            let arr = new Array(n).fill(0);
+            let perm = new Array(n).fill(0).map((x, i) => i);
+            let tmp = new Array(n).fill(0).map((x, i) => perm[i]);
+            let ans = 0;
+            while (!isTrue(arr, perm)) {
+                for (let i = 0; i < arr.length; i++) {
+                    if (i % 2 === 0) arr[i] = tmp[i / 2];
+                    else arr[i] = tmp[n / 2 + (i - 1) / 2];
+                }
+                tmp = new Array(n).fill(0).map((x, i) => arr[i])
+                ans++;
+            }
+            return ans;
+        };
+        const isTrue = function (arrA, arrB) {
+            if (arrA.length !== arrB.length) return false;
+            for (let i = 0; i < arrA.length; i++)
+                if (arrA[i] !== arrB[i]) return false;
+            return true;
+        }
+        
+        let n = 6;
+        // reinitializePermutation(n);
+        console.log(reinitializePermutation(n));
+    </script>
+</body>
+</html>

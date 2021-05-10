@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 57 和为s的两个数字</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number[]} nums
+         * @param {number} target
+         * @return {number[]}
+         */
+        var twoSum = function (nums, target) {
+            const len = nums.length;
+            let left = 0, right = len - 1;
+            let ans = [];
+            while (left < right) {
+                if (nums[left] + nums[right] === target) {
+                    ans.push(nums[left]);
+                    ans.push(nums[right]);
+                    return ans;
+                }
+                if (nums[left] + nums[right] < target) left++;
+                else right--;
+            }
+            
+            return ans;
+        };
+        
+        let nums = [16,16,18,24,30,32], target = 48;
+        console.log(twoSum(nums, target));
+    </script>
+</body>
+</html>

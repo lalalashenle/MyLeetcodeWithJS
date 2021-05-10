@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 19 正则表达式匹配</title>
+</head>
+<body>
+    
+    <script>
+        var isMatch = function (s, p) {
+            let reg = new RegExp("^" + p + "$");
+            return reg.test(s);
+        };
+        let s = "aa", p = "a";
+        console.log(isMatch(s, p));
+    </script>
+</body>
+</html>

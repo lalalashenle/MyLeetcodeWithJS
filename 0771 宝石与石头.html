@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0771 宝石与石头</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {string} jewels
+         * @param {string} stones
+         * @return {number}
+         */
+        var numJewelsInStones = function (jewels, stones) {
+            let map = new Map();
+            for (let s of jewels)
+                map.set(s, true);
+            console.log(map)
+            let ans = 0;
+            for (let s of stones) {
+                if (map.has(s)) ans++;
+            }
+            return ans;
+        };
+        let J = "aA", S = "aAAbbbb";
+        console.log(numJewelsInStones(J, S));
+    </script>
+</body>
+</html>

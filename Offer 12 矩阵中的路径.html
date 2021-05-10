@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 12 矩阵中的路径</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {character[][]} board
+         * @param {string} word
+         * @return {boolean}
+         */
+        var exist = function (board, word) {
+            let row = board.length, col = board[0].length;
+            const dfs = function (i, j, index, board) {
+                if (i < 0 || i >= row || j < 0 || j >= col || board[i][j] !== word[index]) return false;
+                if (index === word.length - 1) return true;
+                let tmp = board[i][j];
+                board[i][j] = '-';
+                let res = dfs(i, j - 1, index + 1, board) ||
+                        dfs(i, j + 1, index + 1, board) ||
+                        dfs(i - 1, j, index + 1, board) ||
+                        dfs(i + 1, j, index + 1, board);
+                board[i][j] = tmp;
+                return res;
+            }
+            
+            for (let i = 0; i < row; i++)
+                for (let j = 0; j < col; j++) {
+                    if (dfs(i, j, 0, board)) return true;
+                }
+            
+            return false;
+        };
+        
+        let board = [["a","b"],["c","d"]], word = "abcd";
+        
+        console.log(exist(board, word));
+    
+    </script>
+</body>
+</html>

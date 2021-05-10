@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 32-I 从上到下打印二叉树</title>
+</head>
+<body>
+    
+    <script>
+        function TreeNode(val) {
+            this.val = val;
+            this.left = this.right = null;
+        }
+        // 层次遍历
+        var levelOrder = function (root) {
+            if(!root) return [];
+            const stack = [];
+            const ans = [];
+            stack.push(root);
+            while (stack.length) {
+                let node = stack[0];
+                stack.shift();
+                ans.push(node.val);
+                if (node.left) stack.push(node.left);
+                if (node.right) stack.push(node.right);
+            }
+            return ans;
+        };
+    </script>
+</body>
+</html>

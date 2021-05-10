@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 14-I 剪绳子</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number} n
+         * @return {number}
+         */
+        // 2 <= n <= 58
+        var cuttingRope = function (n) {
+            let memo = new Array(n + 1).fill(0);
+            memo[1] = 1;
+            memo[2] = 1;
+            for (let i = 3; i <= n; i++) {
+                for (let j = 2; j < i; j++) {
+                    memo[i] = Math.max(memo[i], j * (i - j), j * memo[i - j]);
+                }
+            }
+            return memo[n];
+        };
+
+        let n = 10;
+        console.log(cuttingRope(n));
+    </script>
+</body>
+</html>

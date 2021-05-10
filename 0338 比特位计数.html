@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0338</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number} num
+         * @return {number[]}
+         */
+        // 按位与运算（&）的一个性质是：
+        // 对于任意整数x，令 x = x & (x - 1)，
+        // 该运算将x的二进制表示的最后一个1变成0
+        
+        // 动归解法：
+        // 对于正整数x，将其二进制表示右移一位，等价于将其二进制表示的最低位去掉
+        // bits[i] = bits[i/2] + 奇数(1) or 偶数(0)
+        var countBits = function (num) {
+            let res = new Array(num + 1).fill(0);
+            for (let i = 1; i <= num; i++)
+                res[i] = res[i >> 1] + (i & 1);
+            return res;
+        };
+        let num = 5;
+        console.log(countBits(num));
+    </script>
+</body>
+</html>

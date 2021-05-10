@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 49 丑数</title>
+</head>
+<body>
+    
+    <script>
+        var nthUglyNumber = function (n) {
+            let i = 0, j = 0, k = 0, index = 0;
+            let ugly_memo = [];
+            ugly_memo.push(1);
+            index++;
+            while (index !== n) {
+                let tmp = Math.min(ugly_memo[i] * 2, ugly_memo[j] * 3, ugly_memo[k] * 5);
+                if (tmp === ugly_memo[i] * 2) i++;
+                if (tmp === ugly_memo[j] * 3) j++;
+                if (tmp === ugly_memo[k] * 5) k++;
+                ugly_memo[index] = tmp;
+                index++;
+            }
+            return ugly_memo[n - 1];
+        };
+        
+        // console.log(nthUglyNumber(1407));
+    </script>
+</body>
+</html>

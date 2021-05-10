@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1486 数组异或操作</title>
+</head>
+<body>
+    
+    <script>
+        var xorOperation = function (n, start) {
+            let i = 0;
+            let ans = start + 2 * (i++);
+            while (i < n) {
+                ans ^= (start + 2 * (i++))
+            }
+            return ans;
+        };
+        let n = 4, start = 3;
+        console.log(xorOperation(n, start));
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0132 分割回文串-II</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {string} s
+         * @return {number}
+         */
+        var minCut = function (s) {
+            const len = s.length;
+            // 动归部分：
+            const memo = new Array(len).fill(0).map(() => new Array(len).fill(true));
+            
+            for (let i = len - 1; i >= 0; i--)
+                for (let j = i + 1; j < len; j++) {
+                    memo[i][j] = (s[i] === s[j]) && memo[i + 1][j - 1];
+                }
+            
+            let dp = new Array(len).fill(Number.MAX_SAFE_INTEGER);
+            for (let i = 0; i < len; i++) {
+                if (memo[0][i] === true) {
+                    dp[i] = 0;
+                } else {
+                    for (let j = 0; j <= i; j++)
+                        if (memo[j][i] === true) {
+                            dp[i] = Math.min(dp[i], dp[j - 1] + 1);
+                        }
+                        
+                }
+            }
+            
+            return dp[len - 1];
+        };
+        
+        let s = "cdd";
+        console.log(minCut(s));
+        // minCut(s);
+    
+    </script>
+</body>
+</html>

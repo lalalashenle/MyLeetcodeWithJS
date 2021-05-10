@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0581 最短无序连续子数组</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number[]} nums
+         * @return {number}
+         */
+        var findUnsortedSubarray = function (nums) {
+            let len = nums.length;
+            let num_s = nums.slice().sort((a, b) => a - b);
+            let left = 0, right = len - 1;
+            for (; left < len; left++)
+                if (nums[left] !== num_s[left])
+                    break;
+            for (; right >= 0; right--)
+                if (nums[right] !== num_s[right])
+                    break;
+            return left < right ? right - left + 1 : 0;
+        };
+        let nums = [2,  15];
+        console.log(findUnsortedSubarray(nums));
+    </script>
+</body>
+</html>

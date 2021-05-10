@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0575 分糖果</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number[]} candyType
+         * @return {number}
+         */
+        var distributeCandies = function (candyType) {
+            let m = new Map();
+            let len = candyType.length;
+            let typeNum = 0;
+            for (let c of candyType) {
+                if (!m.has(c)) {
+                    m.set(c, true);
+                    typeNum++;
+                }
+            }
+            return (len >> 1) >= typeNum ? typeNum : (len >> 1);
+        };
+        
+        let candies = [1, 1, 2, 3, 2, 3, 4, 3, 5, 6];
+        console.log(distributeCandies(candies));
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 36 二叉搜索树与双向链表</title>
+</head>
+<body>
+    
+    <script>
+        
+        // Definition for a Node.
+        function Node(val, left, right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        };
+        
+        
+        var treeToDoublyList = function (root) {
+            let cur = root, pre = null;
+            return preSearch(cur, pre);
+        };
+        
+        // 中序遍历 + 双向链表
+        const preSearch = function (curTreeNode, preTreeNode) {
+            if (curTreeNode) {
+                preTreeNode(curTreeNode.left, curTreeNode);
+                // head
+                if (!preTreeNode) {
+                
+                } else {
+                
+                }
+                preTreeNode(curTreeNode.right, curTreeNode);
+            }
+        }
+    </script>
+</body>
+</html>

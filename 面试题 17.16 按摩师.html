@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面试题 17.16 按摩师</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number[]} nums
+         * @return {number}
+         */
+        var massage = function (nums) {
+            let len = nums.length;
+            if (len === 0) return 0;
+            if (len === 1) return nums[0];
+            if (len === 2) return Math.max(nums[0], nums[1]);
+            let memo = new Array(len).fill(0);
+            memo[0] = nums[0];
+            memo[1] = Math.max(nums[0], nums[1]);
+            for (let i = 2; i < len; i++) {
+                memo[i] = Math.max(memo[i - 2] + nums[i], memo[i - 1]);
+            }
+            
+            return memo[len - 1];
+        };
+        
+        let nums = [];
+        console.log(massage(nums));
+    </script>
+</body>
+</html>

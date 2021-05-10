@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 16 数值的整数次方</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number} x
+         * @param {number} n
+         * @return {number}
+         */
+        var myPow = function (x, n) {
+            if (n === 0) return 1;
+            else if (n > 0) {
+                return biMul(x, n);
+            } else {
+                return 1 / biMul(x, -n);
+            }
+        };
+        
+        let biMul = (x, n) => {
+            let index = 1;
+            let tmp_x = x;
+            while (index < n) {
+                if (index * 2 < n)
+                    index *= 2;
+                else break;
+                tmp_x *= tmp_x;
+            }
+            let ans = tmp_x;
+            for (let i = 0; i < n - index; i++)
+                ans *= x;
+            return ans;
+        }
+        
+        let x = 2.00000, n = -2147483648;
+         console.log(myPow(x, n))
+        // console.log(Infinity)
+    </script>
+</body>
+</html>

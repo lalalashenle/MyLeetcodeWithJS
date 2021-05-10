@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Offer 56-II 数组中数字出现的次数-II</title>
+</head>
+<body>
+    
+    <script>
+        var singleNumber = function (nums) {
+            nums.sort((a, b) => a - b);
+            for (let i = 0; i < nums.length; i++) {
+                if (i === nums.length - 1 || nums[i] !== nums[i + 1])
+                    return nums[i];
+                else if (nums[i] === nums[i + 1] && nums[i] === nums[i + 2])
+                    i += 2;
+            }
+            return -1;
+        };
+        
+        let nums = [9, 1, 7, 9, 7, 9, 7];
+        console.log(singleNumber(nums));
+    </script>
+</body>
+</html>

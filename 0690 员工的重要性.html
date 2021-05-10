@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0690 员工的重要性</title>
+</head>
+<body>
+    
+    <script>
+        
+        function Employee(id, importance, subordinates) {
+            this.id = id;
+            this.importance = importance;
+            this.subordinates = subordinates;
+        }
+        
+        
+        var GetImportance = function (employees, id) {
+            for (let e of employees) {
+                if (e.id === id) {
+                    if (!e.subordinates.length) return e.importance;
+                    for (let ee of e.subordinates)
+                        e.importance += GetImportance(employees, ee);
+                    return e.importance;
+                }
+            }
+            return 0;
+        };
+    </script>
+</body>
+</html>

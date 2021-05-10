@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1006 笨阶乘</title>
+</head>
+<body>
+    
+    <script>
+        var clumsy = function (N) {
+            let opt = 0;
+            let stack = [];
+            stack.push(N);
+            N -= 1;
+            while (N) {
+                // 10 * 9 / 8 + 7 - 6 * 5 / 4 + 3 - 2 * 1
+                if (opt % 4 === 0) {            // *
+                    stack.push(stack.pop() * N);
+                } else if (opt % 4 === 1) {     // /
+                    let tmp = stack.pop() / N;
+                    if (tmp >= 0)
+                        stack.push(Math.floor(tmp));
+                    else stack.push(Math.ceil(tmp));
+                } else if (opt % 4 === 2) {     // +
+                    stack.push(N);
+                } else if (opt % 4 === 3) {     // -
+                    stack.push(0 - N);
+                }
+                
+                opt++;
+                N--;
+            }
+            let ans = stack.pop();
+            while (stack.length) ans += stack.pop();
+            return ans;
+        };
+
+        console.log(clumsy(10));
+    </script>
+</body>
+</html>

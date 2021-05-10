@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>0330 按要求补齐数组</title>
+</head>
+<body>
+    
+    <script>
+        /*
+         * @param {number[]} nums
+         * @param {number} n
+         * @return {number}
+         */
+        var minPatches = function (nums, n) {
+            let ans = 0, add = 0, index = 0, tmp;
+            while (add < n) {
+                if (index < nums.length && nums[index] <= add + 1) {
+                        add += nums[index];
+                        index++;
+                } else {
+                    tmp = add + 1;
+                    add += tmp;
+                    ans++;
+                }
+                
+            }
+            
+            return ans;
+        };
+        let nums = [1,2,2], n = 5;
+        console.log(minPatches(nums, n));
+    </script>
+</body>
+</html>

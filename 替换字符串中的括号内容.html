@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>替换字符串中的括号内容</title>
+</head>
+<body>
+    
+    <script>
+        var evaluate = function (s, knowledge) {
+            let reg = /\(\w+\)/g;
+            let set = new Set();
+            if (s.match(reg) === null) return s;
+            for (let a of s.match(reg))
+                set.add(a.replace("(", "").replace(")", ""));
+            
+            for (let k of knowledge) {
+                if (set.has(k[0])) {
+                    let k_reg = new RegExp("\\(" + k[0] + "\\)", "g")
+                    s = s.replace(k_reg, k[1]);
+                }
+            }
+            
+            if (s.match(reg)) s = s.replace(reg, "?");
+            
+            return s;
+        };
+        let s = "(a)(b)", knowledge = [["a","b"],["b","a"]];
+        // evaluate(s, knowledge);
+        console.log(evaluate(s, knowledge));
+    </script>
+</body>
+</html>

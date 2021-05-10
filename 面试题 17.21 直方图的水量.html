@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面试题 17.21 直方图的水量</title>
+</head>
+<body>
+    
+    <script>
+        var trap = function (height) {
+            let len = height.length;
+            let ans = 0;
+            let leftMax = new Array(len).fill(0), rightMax = new Array(len).fill(0);
+            // 记录每个元素两边的最大边界值
+            leftMax[0] = height[0];
+            for (let i = 1; i < len; i++) {
+                leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+            }
+            rightMax[len - 1] = height[len - 1];
+            for (let i = len - 2; i >= 0; i--) {
+                rightMax[i] = Math.max(rightMax[i + 1], height[i]);
+            }
+            for (let i = 0; i < len; i++)
+                ans += (Math.min(leftMax[i], rightMax[i]) - height[i])
+            
+            return ans;
+        };
+        // 299
+        let height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
+        let height2 = [6, 7, 345, 46, 555, 4, 3, 0];
+        let height3 = [5, 2, 1, 2, 1, 5];
+        console.log(trap(height));
+        console.log(trap(height2));
+        console.log(trap(height3)); // 14
+    </script>
+</body>
+</html>
